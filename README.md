@@ -5,10 +5,11 @@ Steps will follow to build this project :-
 1. create an executable maven fat jar project using assembly plugin -- done 16 august
 2. create a spring xml config project -- done 17 august
 3. integrate postgres and spring using xml config - done 17 august
-4. set up spring spring batch xml config project 
+4. set up spring spring batch xml config project - done 17 august
 5. integate micrometer in above 
 6. integrate and learn how prometheus will come into picture 
 7. set up grafana on local and dashboard config in the project
+8. define a custon and interesting spring batch job
 
 # spring xml based config
 spring uses java reflection feature to create beans/objects etc. xml based config or java based are just two ways to tell Spring what type of beans we want.  
@@ -27,3 +28,6 @@ defined `dataSource` bean in `context.xml`
 added maven dependencies of postgres driver and spring jdbc
 
 # spring batch xml
+set up spring batch using xml config. since the objective of this project is to focus spring batch micrometer integratio. For now have set up football job defined in spring batch samples project.
+https://github.com/spring-projects/spring-batch/tree/main/spring-batch-samples/src/main/java/org/springframework/batch/samples/football
+https://www.digitalocean.com/community/tutorials/spring-batch-example

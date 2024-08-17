@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.ra.springbatch.micrometer.domain;
+package dev.ra.springbatch.micrometer;
 
 import java.io.Serializable;
 

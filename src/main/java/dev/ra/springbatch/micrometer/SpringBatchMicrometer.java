@@ -1,27 +1,30 @@
 package dev.ra.springbatch.micrometer;
 
-import dev.ra.springbatch.micrometer.dao.PlayerDao;
-import dev.ra.springbatch.micrometer.domain.Game;
-import dev.ra.springbatch.micrometer.domain.Player;
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobExecution;
+import org.springframework.batch.core.JobParameters;
+import org.springframework.batch.core.JobParametersBuilder;
+import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class SpringBatchMicrometer {
-    private static ApplicationContext context;
-    public static void main(String[] args) {
-      context = new ClassPathXmlApplicationContext("context.xml");
-      String param = args[0];
-      if (param.equals("player") ) {
-          Player p = (Player) context.getBean("player");
-          System.out.println(p);
-          PlayerDao playerDao = (PlayerDao) context.getBean("playerDao");
-          playerDao.save(p);
-      } else if(param.equals("game")) {
-          Game g = (Game) context.getBean("game");
-          System.out.println(g);
-      } else {
-          System.out.println("invalid value");
-      }
 
+    public static void main(String[] args) {
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("job/footballJob.xml");
+
+        JobLauncher jobLauncher = (JobLauncher) context.getBean("jobLauncher");
+        Job job = (Job) context.getBean("footballJob");
+        JobParameters jobParameters = new JobParametersBuilder()
+                .addLong("time", System.currentTimeMillis())
+                .toJobParameters();
+        try {
+            JobExecution execution = jobLauncher.run(job, jobParameters);
+            System.out.println("Exit Status : " + execution.getStatus());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("Done");
+        context.close();
     }
 }
