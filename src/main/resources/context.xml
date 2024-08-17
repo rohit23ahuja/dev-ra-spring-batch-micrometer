@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="player"
+          class="dev.ra.springbatch.micrometer.domain.Player">
+        <property name="id" value="123"/>
+        <property name="lastName" value="ahuja"/>
+        <property name="firstName" value="rohit"/>
+    </bean>
+
+    <bean id="game"
+          class="dev.ra.springbatch.micrometer.domain.Game">
+        <property name="id" value="456"/>
+        <property name="year" value="2000"/>
+        <property name="team" value="india"/>
+    </bean>
+</beans>
