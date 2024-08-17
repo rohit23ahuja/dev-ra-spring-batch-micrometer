@@ -17,4 +17,19 @@
         <property name="year" value="2000"/>
         <property name="team" value="india"/>
     </bean>
+
+
+    <bean id="dataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.postgresql.Driver"/>
+        <property name="url" value="jdbc:postgresql://localhost:5432/footballdb"/>
+        <property name="username" value="footballdbadmin"/>
+        <property name="password" value="password"/>
+    </bean>
+
+
+    <bean id="playerDao" class="dev.ra.springbatch.micrometer.dao.PlayerDao">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
 </beans>

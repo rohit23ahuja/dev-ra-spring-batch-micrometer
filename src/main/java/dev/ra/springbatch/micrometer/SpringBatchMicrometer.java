@@ -1,5 +1,6 @@
 package dev.ra.springbatch.micrometer;
 
+import dev.ra.springbatch.micrometer.dao.PlayerDao;
 import dev.ra.springbatch.micrometer.domain.Game;
 import dev.ra.springbatch.micrometer.domain.Player;
 import org.springframework.context.ApplicationContext;
@@ -13,6 +14,8 @@ public class SpringBatchMicrometer {
       if (param.equals("player") ) {
           Player p = (Player) context.getBean("player");
           System.out.println(p);
+          PlayerDao playerDao = (PlayerDao) context.getBean("playerDao");
+          playerDao.save(p);
       } else if(param.equals("game")) {
           Game g = (Game) context.getBean("game");
           System.out.println(g);
