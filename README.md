@@ -6,8 +6,8 @@ Steps will follow to build this project :-
 2. create a spring xml config project -- done 17 august
 3. integrate postgres and spring using xml config - done 17 august
 4. set up spring spring batch xml config project - done 17 august
-5. integate micrometer in above 
-6. integrate and learn how prometheus will come into picture 
+5. out of the box micrometer metrics 
+6. install and configure prometheus 
 7. set up grafana on local and dashboard config in the project
 8. define a custon and interesting spring batch job
 
@@ -31,3 +31,23 @@ added maven dependencies of postgres driver and spring jdbc
 set up spring batch using xml config. since the objective of this project is to focus spring batch micrometer integratio. For now have set up football job defined in spring batch samples project.
 https://github.com/spring-projects/spring-batch/tree/main/spring-batch-samples/src/main/java/org/springframework/batch/samples/football
 https://www.digitalocean.com/community/tutorials/spring-batch-example
+
+# out of the box micrometer metrics
+java instrumentation is a feature that allows extra code to be executed while our application is getting executed. How 
+it works is - you create a java agent separate from your application and you pass this java agent when executing your 
+application jar. This technique is used by various profiling and monitoring applications and libraries such as jacoco
+etc.
+https://medium.com/javarevisited/what-is-java-instrumentation-why-is-it-needed-1f9aa467433
+
+Micrometer is a metrics instrumentation library for JVM based applications. Its a facade over various instrumentation 
+clients related to various monitoring systems such as prometheus
+https://docs.micrometer.io/micrometer/reference/concepts.html
+
+# prometheus configuration and integration
+Prometheus is a monitoring platform that collects metrics from monitored targets by scraping metrics HTTP endpoints on
+these targets. 
+https://prometheus.io/docs/introduction/first_steps/
+https://stackoverflow.com/questions/66659203/publishing-spring-batch-metrics-using-micrometer
+installed prometheus push gateway
+installed and configured prometheus
+installed grafana
