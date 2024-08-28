@@ -87,11 +87,11 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "spring_batch_job_seconds_max",
+          "expr": "spring_batch_job_active_seconds_duration_sum",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "{{name}} {{status}}",
+          "legendFormat": "{{spring_batch_job_active_name}} {{status}}",
           "metric": "",
           "refId": "A",
           "step": 1200
@@ -193,7 +193,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "rate(spring_batch_job_seconds_count[1m]) * 60",
+          "expr": "rate(spring_batch_job_active_seconds_duration_sum[1m]) * 60",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -291,7 +291,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(sum(rate(spring_batch_job_seconds_count{status=\"FAILED\"}[5m])) by (name, status)) / (sum(rate(spring_batch_job_seconds_count[5m])) by (name, status))",
+          "expr": "(sum(rate(spring_batch_job_active_seconds_duration_sum{status=\"FAILED\"}[5m])) by (name, status)) / (sum(rate(spring_batch_job_active_seconds_duration_sum[5m])) by (name, status))",
           "format": "time_series",
           "hide": false,
           "instant": false,
@@ -387,7 +387,7 @@
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "read {{status}}",
+          "legendFormat": "{{spring_batch_item_read_job_name}} ({{spring_batch_item_read_step_name}})",
           "refId": "B"
         }
       ],
@@ -478,7 +478,7 @@
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "write {{status}}",
+          "legendFormat": "{{spring_batch_chunk_write_job_name}} ({{spring_batch_chunk_write_step_name}})",
           "refId": "B"
         }
       ],
