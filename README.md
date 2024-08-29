@@ -51,3 +51,7 @@ https://stackoverflow.com/questions/66659203/publishing-spring-batch-metrics-usi
 installed prometheus push gateway
 installed and configured prometheus
 installed grafana
+
+to read 
+https://devcodef1.com/news/1111534/spring-boot-batch-job-with-micrometer-metrics
+https://stackoverflow.com/questions/66379927/is-there-an-sample-code-available-to-capture-spring-batch-micro-metrics/66405849#66405849
