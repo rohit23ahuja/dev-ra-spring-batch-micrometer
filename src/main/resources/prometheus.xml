@@ -17,7 +17,7 @@
 
 
     <task:scheduled-tasks scheduler="metricsScheduler">
-        <task:scheduled ref="prometheusConfiguration" method="pushMetrics" fixed-delay="5000" />
+        <task:scheduled ref="prometheusConfiguration" method="pushMetrics" fixed-delay="3000" />
     </task:scheduled-tasks>
 
     <task:scheduler id="metricsScheduler" pool-size="1"/>

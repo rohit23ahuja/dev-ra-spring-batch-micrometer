@@ -30,7 +30,6 @@ public class PrometheusConfiguration {
     public void pushMetrics() {
         try {
             pushGateway.pushAdd(collectorRegistry, "springbatch", groupingKey);
-            System.out.println("pushing data");
         }
         catch (Throwable ex) {
             System.err.println("Unable to push metrics to Prometheus Push Gateway");
