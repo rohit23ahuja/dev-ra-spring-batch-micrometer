@@ -51,3 +51,16 @@ https://stackoverflow.com/questions/66659203/publishing-spring-batch-metrics-usi
 installed prometheus push gateway
 installed and configured prometheus
 installed grafana
+
+#prometheus without micrometer and push gateway
+links to read to setup correctly:-
+https://prometheus.github.io/client_java/instrumentation/jvm/
+https://github.com/prometheus/pushgateway
+https://stackoverflow.com/questions/56594029/how-to-instrument-java-application-code-metrics-to-prometheus?rq=3
+https://stackoverflow.com/questions/68753082/pushing-metrics-to-pushgateway-replaces-the-old-one
+https://stackoverflow.com/questions/53728336/instrumenting-a-java-application-with-prometheus?noredirect=1&lq=1
+https://stackoverflow.com/questions/62832012/how-to-collect-the-prometheus-metrics-in-a-java-program?rq=3
+https://stackoverflow.com/questions/46277332/how-to-correctly-use-prometheus-histogram-from-java-client-to-track-size-rather?rq=3
+https://stackoverflow.com/questions/53971589/instrumenting-prometheus-metrics-with-java-client?rq=3
+https://stackoverflow.com/questions/67385735/metric-to-use-for-job-duration-in-prometheus-gauge-or-summary/67395590#67395590
+https://stackoverflow.com/questions/55395769/micrometer-metrics-with-spring-java-no-spring-boot

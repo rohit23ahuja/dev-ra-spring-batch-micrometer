@@ -1,3 +1,4 @@
+<!--
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -13,13 +14,13 @@
 
     <context:component-scan base-package="dev.ra.springbatch.micrometer" />
 
-    <bean id="prometheusConfiguration" class="dev.ra.springbatch.micrometer.PrometheusConfiguration" init-method="init" />
+    <bean id="prometheusPushGatewayConfiguration" class="dev.ra.springbatch.micrometer.PrometheusPushGatewayConfiguration" init-method="init" />
 
 
     <task:scheduled-tasks scheduler="metricsScheduler">
-        <task:scheduled ref="prometheusConfiguration" method="pushMetrics" fixed-delay="3000" />
+        <task:scheduled ref="prometheusPushGatewayConfiguration" method="pushMetrics" fixed-delay="3000"/>
     </task:scheduled-tasks>
 
     <task:scheduler id="metricsScheduler" pool-size="1"/>
 
-</beans>
+</beans>-->
