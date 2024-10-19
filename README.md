@@ -48,11 +48,11 @@ Prometheus is a monitoring platform that collects metrics from monitored targets
 these targets. 
 https://prometheus.io/docs/introduction/first_steps/
 https://stackoverflow.com/questions/66659203/publishing-spring-batch-metrics-using-micrometer
-installed prometheus push gateway
+installed prometheus push gateway - push gateway caches metrics of jobs and exposes them to prometheus
 installed and configured prometheus
 installed grafana
 
-#prometheus without micrometer and push gateway
+# prometheus without micrometer and push gateway
 links to read to setup correctly:-
 https://prometheus.github.io/client_java/instrumentation/jvm/
 https://github.com/prometheus/pushgateway
