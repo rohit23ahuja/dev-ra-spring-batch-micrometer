@@ -4,6 +4,7 @@
 	   xsi:schemaLocation="http://www.springframework.org/schema/batch https://www.springframework.org/schema/batch/spring-batch.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 
+	<context:annotation-config />
 	<import resource="../database.xml" />
 	<import resource="../prometheus.xml" />
 
@@ -60,7 +61,7 @@
 	</bean>
 
 	<bean id="playerFileItemReader" class="org.springframework.batch.item.file.FlatFileItemReader">
-		<property name="resource" value="classpath:data/player.csv" />
+		<property name="resource" value="classpath:data/player-small1.csv" />
 		<property name="lineMapper">
 			<bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
 				<property name="lineTokenizer">
@@ -76,7 +77,7 @@
 	</bean>
 
 	<bean id="gameFileItemReader" class="org.springframework.batch.item.file.FlatFileItemReader">
-		<property name="resource" value="classpath:data/games.csv" />
+		<property name="resource" value="classpath:data/games-small.csv" />
 		<property name="lineMapper">
 			<bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
 				<property name="lineTokenizer">
