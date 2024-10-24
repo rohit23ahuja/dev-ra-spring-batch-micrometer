@@ -60,13 +60,13 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-	<bean id="playerFileItemReader" class="org.springframework.batch.item.file.FlatFileItemReader">
+	<bean id="playerFileItemReader" class="org.springframework.batch.item.file.FlatFileItemReader" scope="step">
 		<property name="resource" value="classpath:data/player-small1.csv" />
 		<property name="lineMapper">
 			<bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
 				<property name="lineTokenizer">
 					<bean class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer">
-						<property name="names" value="ID,lastName,firstName,position,birthYear,debutYear" />
+						<property name="names" value="#{jobParameters[names]}" />
 					</bean>
 				</property>
 				<property name="fieldSetMapper">
