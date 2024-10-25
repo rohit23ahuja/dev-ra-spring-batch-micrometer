@@ -10,8 +10,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class SpringBatchMicrometer {
 
 	public static void main(String[] args) {
+		final String jobName = args[0];
+		System.setProperty("springbatch.job.name", jobName);
+		
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("job/footballJob.xml");
-		String jobName = args[0];
 		System.out.println("Job name: " + jobName);
 		if (jobName.equals("footballJobXml")) {
 	        JobLauncher jobLauncher = (JobLauncher) context.getBean("jobLauncher");
@@ -30,7 +32,21 @@ public class SpringBatchMicrometer {
 	        System.out.println("Done");
 	        context.close();
 		} else if(jobName.equals("cricketJobJava")) {
-			
+	        JobLauncher jobLauncher = (JobLauncher) context.getBean("jobLauncher");
+	        JobParameters jobParameters = new JobParametersBuilder()
+	                .addLong("time", System.currentTimeMillis())
+	                .addString("job.name", jobName)
+	                .addString("file.name", "C:/temp/cricketplayer.csv")
+	                .toJobParameters();
+	        Job job = (Job) context.getBean("configureJob");
+	        try {
+	            JobExecution execution = jobLauncher.run(job, jobParameters);
+	            System.out.println("Exit Status : " + execution.getStatus());
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        System.out.println("Done");
+	        context.close();
 		}
 
 	}
