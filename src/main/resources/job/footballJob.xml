@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context" 
 	   xsi:schemaLocation="http://www.springframework.org/schema/batch https://www.springframework.org/schema/batch/spring-batch.xsd
-		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
+	<context:annotation-config />
 	<import resource="../database.xml" />
 	<import resource="../prometheus.xml" />
 
+    <bean name = "cricketJobConfiguration" class="dev.ra.springbatch.micrometer.CricketJobConfiguration"/>
 
 	<bean id="jobRepository"
 		  class="org.springframework.batch.core.repository.support.JobRepositoryFactoryBean">
@@ -59,13 +62,13 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-	<bean id="playerFileItemReader" class="org.springframework.batch.item.file.FlatFileItemReader">
-		<property name="resource" value="classpath:data/player.csv" />
+	<bean id="playerFileItemReader" class="org.springframework.batch.item.file.FlatFileItemReader" scope="step">
+		<property name="resource" value="classpath:data/player-small1.csv" />
 		<property name="lineMapper">
 			<bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
 				<property name="lineTokenizer">
 					<bean class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer">
-						<property name="names" value="ID,lastName,firstName,position,birthYear,debutYear" />
+						<property name="names" value="#{jobParameters[names]}" />
 					</bean>
 				</property>
 				<property name="fieldSetMapper">
@@ -76,7 +79,7 @@
 	</bean>
 
 	<bean id="gameFileItemReader" class="org.springframework.batch.item.file.FlatFileItemReader">
-		<property name="resource" value="classpath:data/games.csv" />
+		<property name="resource" value="classpath:data/games-small.csv" />
 		<property name="lineMapper">
 			<bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
 				<property name="lineTokenizer">
