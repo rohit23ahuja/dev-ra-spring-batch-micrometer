@@ -36,9 +36,9 @@ public class SpringBatchMicrometer {
 	        JobParameters jobParameters = new JobParametersBuilder()
 	                .addLong("time", System.currentTimeMillis())
 	                .addString("job.name", jobName)
-	                .addString("file.name", "C:/temp/cricketplayer.csv")
+	                .addString("file.name", "E:/temp/cricketplayer.csv")
 	                .toJobParameters();
-	        Job job = (Job) context.getBean("configureJob");
+	        Job job = (Job) context.getBean("cricketJob");
 	        try {
 	            JobExecution execution = jobLauncher.run(job, jobParameters);
 	            System.out.println("Exit Status : " + execution.getStatus());

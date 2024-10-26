@@ -9,7 +9,7 @@
 	<import resource="../database.xml" />
 	<import resource="../prometheus.xml" />
 
-    <bean name = "jobConfiguration" class="dev.ra.springbatch.micrometer.JobConfiguration"/>
+    <bean name = "cricketJobConfiguration" class="dev.ra.springbatch.micrometer.CricketJobConfiguration"/>
 
 	<bean id="jobRepository"
 		  class="org.springframework.batch.core.repository.support.JobRepositoryFactoryBean">
