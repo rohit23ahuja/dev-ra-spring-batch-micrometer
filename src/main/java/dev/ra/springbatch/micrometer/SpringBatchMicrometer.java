@@ -48,6 +48,5 @@ public class SpringBatchMicrometer {
 	        System.out.println("Done");
 	        context.close();
 		}
-
 	}
 }
