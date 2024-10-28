@@ -7,9 +7,10 @@
 
 	<context:annotation-config />
 	<import resource="../database.xml" />
-	<import resource="../prometheus.xml" />
 
-    <bean name = "cricketJobConfiguration" class="dev.ra.springbatch.micrometer.CricketJobConfiguration"/>
+	<bean name = "prometheusConfiguration" class="dev.ra.springbatch.micrometer.PrometheusConfiguration"/>
+	<bean name = "cricketJobConfiguration" class="dev.ra.springbatch.micrometer.CricketJobConfiguration"/>
+
 
 	<bean id="jobRepository"
 		  class="org.springframework.batch.core.repository.support.JobRepositoryFactoryBean">
