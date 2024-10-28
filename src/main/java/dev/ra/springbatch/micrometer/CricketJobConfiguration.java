@@ -1,12 +1,14 @@
 package dev.ra.springbatch.micrometer;
 
-import dev.ra.springbatch.micrometer.internal.JdbcCricketPlayerDao;
-import dev.ra.springbatch.micrometer.internal.JdbcPlayerDao;
+import javax.sql.DataSource;
+
 import org.springframework.batch.core.Job;
+import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
+import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.core.step.tasklet.TaskletStep;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
@@ -16,7 +18,6 @@ import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.mapping.FieldSetMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.FileSystemResource;
@@ -24,8 +25,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 import dev.ra.springbatch.micrometer.internal.CricketPlayerFieldSetMapper;
 import dev.ra.springbatch.micrometer.internal.CricketPlayerItemWriter;
-
-import javax.sql.DataSource;
+import dev.ra.springbatch.micrometer.internal.JdbcCricketPlayerDao;
 
 @Configuration
 public class CricketJobConfiguration {

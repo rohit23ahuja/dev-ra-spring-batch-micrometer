@@ -52,14 +52,19 @@ installed prometheus push gateway
 installed and configured prometheus
 installed grafana
 
+# conditional beans
+https://stackoverflow.com/questions/35429168/how-to-conditionally-declare-bean-when-multiple-profiles-are-not-active
+https://jstobigdata.com/spring/profiles-in-spring-to-register-beans-conditionally/
+https://medium.com/@AlexanderObregon/working-with-springs-conditional-annotation-for-conditional-bean-registration-f65bc6a486ea
+
 # to read 
 https://devcodef1.com/news/1111534/spring-boot-batch-job-with-micrometer-metrics
 https://stackoverflow.com/questions/66379927/is-there-an-sample-code-available-to-capture-spring-batch-micro-metrics/66405849#66405849
 
 # pending things - 28/10/2024
-metrics push based on property
 simplejob(java) vs flowjob(xml)
 what threadpoolsize i need to give in ThreadPoolTaskScheduler
 metrics properties should be picked from property file
 test cases
 any problems with adding enablescheduling annotation
+use of componentscan in application
