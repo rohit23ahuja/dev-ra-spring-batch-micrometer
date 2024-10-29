@@ -23,7 +23,7 @@ one negative aspect of doing xml based config - it is does not provide compile t
 
 # spring postgres integration
 installed and configured postgres on machine
-set up `footballdb` on my machine
+set up `footballdb` on my  
 defined `dataSource` bean in `context.xml`
 added maven dependencies of postgres driver and spring jdbc
 
@@ -56,6 +56,9 @@ installed grafana
 https://stackoverflow.com/questions/35429168/how-to-conditionally-declare-bean-when-multiple-profiles-are-not-active
 https://jstobigdata.com/spring/profiles-in-spring-to-register-beans-conditionally/
 https://medium.com/@AlexanderObregon/working-with-springs-conditional-annotation-for-conditional-bean-registration-f65bc6a486ea
+
+# spring batch late binding
+https://github.com/spring-projects/spring-batch/issues/1340 - but its not working for me
 
 # to read 
 https://devcodef1.com/news/1111534/spring-boot-batch-job-with-micrometer-metrics
