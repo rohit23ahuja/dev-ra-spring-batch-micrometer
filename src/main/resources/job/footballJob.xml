@@ -8,9 +8,7 @@
 	<context:annotation-config />
 	<import resource="../database.xml" />
 
-	<bean name = "prometheusConfiguration" class="dev.ra.springbatch.micrometer.PrometheusConfiguration"/>
-	<bean name = "cricketJobConfiguration" class="dev.ra.springbatch.micrometer.CricketJobConfiguration"/>
-
+	<context:component-scan base-package="dev.ra.springbatch.micrometer"/>
 
 	<bean id="jobRepository"
 		  class="org.springframework.batch.core.repository.support.JobRepositoryFactoryBean">
