@@ -64,10 +64,8 @@ https://github.com/spring-projects/spring-batch/issues/1340 - but its not workin
 https://devcodef1.com/news/1111534/spring-boot-batch-job-with-micrometer-metrics
 https://stackoverflow.com/questions/66379927/is-there-an-sample-code-available-to-capture-spring-batch-micro-metrics/66405849#66405849
 
-# pending things - 28/10/2024
+# pending things - 30/10/2024
 simplejob(java) vs flowjob(xml)
 what threadpoolsize i need to give in ThreadPoolTaskScheduler
-metrics properties should be picked from property file
-test cases
 any problems with adding enablescheduling annotation
-use of componentscan in application
+conditional annotation implementation
