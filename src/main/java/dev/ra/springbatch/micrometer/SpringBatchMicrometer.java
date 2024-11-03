@@ -12,7 +12,7 @@ public class SpringBatchMicrometer {
 	public static void main(String[] args) {
 		final String jobName = args[0];
 		System.setProperty("springbatch.job.name", jobName);
-		
+		System.setProperty("cricketEnabled","true");
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("job/footballJob.xml");
 		System.out.println("Job name: " + jobName);
 		if (jobName.equals("footballJobXml")) {
