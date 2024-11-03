@@ -59,13 +59,16 @@ https://medium.com/@AlexanderObregon/working-with-springs-conditional-annotation
 
 # spring batch late binding
 https://github.com/spring-projects/spring-batch/issues/1340 - but its not working for me
+when you provide step then inside that Tasklet, then object TaskletStep is created. and jobscope supposedly does not work on chunk style of tasklets
 
 # to read 
 https://devcodef1.com/news/1111534/spring-boot-batch-job-with-micrometer-metrics
 https://stackoverflow.com/questions/66379927/is-there-an-sample-code-available-to-capture-spring-batch-micro-metrics/66405849#66405849
 
-# pending things - 30/10/2024
-simplejob(java) vs flowjob(xml)
+# notes - spring batch documentation read
+Chunk style processing - read data one by one from a source. when the volume of data is equal to 'commit interval' then write in chunks.
+TaskletStep is an alternative to chunk oriented processing. 
+
+# pending things - 01/11/2024
 what threadpoolsize i need to give in ThreadPoolTaskScheduler
 any problems with adding enablescheduling annotation
-conditional annotation implementation
