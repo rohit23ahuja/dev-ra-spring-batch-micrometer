@@ -69,6 +69,6 @@ https://stackoverflow.com/questions/66379927/is-there-an-sample-code-available-t
 Chunk style processing - read data one by one from a source. when the volume of data is equal to 'commit interval' then write in chunks.
 TaskletStep is an alternative to chunk oriented processing. 
 
-# pending things - 01/11/2024
-what threadpoolsize i need to give in ThreadPoolTaskScheduler
-any problems with adding enablescheduling annotation
+# pending things - 04/11/2024
+how many threads will be running when the batch job runs
+when the batch completes, how send the last metrics and then shutdown taskscheduler and close context
