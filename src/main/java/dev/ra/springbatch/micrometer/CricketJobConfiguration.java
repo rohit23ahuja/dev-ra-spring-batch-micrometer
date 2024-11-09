@@ -2,12 +2,14 @@ package dev.ra.springbatch.micrometer;
 
 import javax.sql.DataSource;
 
+import dev.ra.springbatch.micrometer.internal.CricketService;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
+import org.springframework.batch.core.step.tasklet.MethodInvokingTaskletAdapter;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.core.step.tasklet.TaskletStep;
 import org.springframework.batch.item.ItemWriter;
@@ -35,11 +37,23 @@ public class CricketJobConfiguration {
 	@Bean
 	public Job cricketJob(@Value("${springbatch.job.name}") String jobName,
 						  JobRepository jobRepository,
-						  TaskletStep taskletStep) {
+						  TaskletStep taskletStep,
+						  Step methodInvokingStep) {
 		Job job = new JobBuilder(jobName, jobRepository)
 				.start(taskletStep)
+				.next(methodInvokingStep)
 				.build();
 		return job;
+	}
+
+	@Bean
+	public Step methodInvokingStep(@Value("${springbatch.job.name}") String jobName,
+								   JobRepository jobRepository,
+								   PlatformTransactionManager transactionManager,
+								   MethodInvokingTaskletAdapter methodInvokingTasklet){
+		return new StepBuilder(jobName+"_methodInvokingStep", jobRepository)
+				.tasklet(methodInvokingTasklet, transactionManager)
+				.build();
 	}
 
 	@Bean
@@ -101,4 +115,18 @@ public class CricketJobConfiguration {
 	public FieldSetMapper<CricketPlayer> cricketPlayerFieldSetMapper(){
 		return new CricketPlayerFieldSetMapper();
 	}
+
+	@Bean
+	public CricketService cricketService() { return new CricketService();}
+	@Bean
+	@StepScope
+	public MethodInvokingTaskletAdapter methodInvokingTasklet(@Value("#{jobParameters['message']}") String message,
+																	 CricketService cricketService){
+		MethodInvokingTaskletAdapter methodInvokingTaskletAdapter = new MethodInvokingTaskletAdapter();
+        methodInvokingTaskletAdapter.setTargetObject(cricketService);
+		methodInvokingTaskletAdapter.setTargetMethod("serviceMethod");
+        methodInvokingTaskletAdapter.setArguments(new String[]{message});
+		return methodInvokingTaskletAdapter;
+	}
+
 }

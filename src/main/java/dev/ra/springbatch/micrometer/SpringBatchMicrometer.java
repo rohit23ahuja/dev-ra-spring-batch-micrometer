@@ -37,6 +37,7 @@ public class SpringBatchMicrometer {
 	                .addLong("time", System.currentTimeMillis())
 	                .addString("job.name", jobName)
 	                .addString("file.name", "E:/temp/cricketplayer.csv")
+					.addString("message","i love cricket")
 	                .toJobParameters();
 	        Job job = (Job) context.getBean("cricketJob");
 	        try {
