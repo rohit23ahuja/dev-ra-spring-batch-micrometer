@@ -1,5 +1,7 @@
 package dev.ra.springbatch.micrometer;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobParameters;
@@ -9,12 +11,14 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class SpringBatchMicrometer {
 
+	private static final Logger _log = LoggerFactory.getLogger(SpringBatchMicrometer.class);
+
 	public static void main(String[] args) {
 		final String jobName = args[0];
 		System.setProperty("springbatch.job.name", jobName);
 		System.setProperty("cricketEnabled","true");
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("job/footballJob.xml");
-		System.out.println("Job name: " + jobName);
+		_log.info("Job name: {}", jobName);
 		if (jobName.equals("footballJobXml")) {
 	        JobLauncher jobLauncher = (JobLauncher) context.getBean("jobLauncher");
 	        Job job = (Job) context.getBean("footballJob");
@@ -25,11 +29,11 @@ public class SpringBatchMicrometer {
 	                .toJobParameters();
 	        try {
 	            JobExecution execution = jobLauncher.run(job, jobParameters);
-	            System.out.println("Exit Status : " + execution.getStatus());
+				_log.info("Exit Status : {}", execution.getStatus());
 	        } catch (Exception e) {
-	            e.printStackTrace();
+				_log.error("Exception occurred.", e);
 	        }
-	        System.out.println("Done");
+			_log.info("Done");
 	        context.close();
 		} else if(jobName.equals("cricketJobJava")) {
 	        JobLauncher jobLauncher = (JobLauncher) context.getBean("jobLauncher");
@@ -42,11 +46,11 @@ public class SpringBatchMicrometer {
 	        Job job = (Job) context.getBean("cricketJob");
 	        try {
 	            JobExecution execution = jobLauncher.run(job, jobParameters);
-	            System.out.println("Exit Status : " + execution.getStatus());
+				_log.info("Exit Status : {}", execution.getStatus());
 	        } catch (Exception e) {
-	            e.printStackTrace();
+				_log.error("Exception occurred.", e);
 	        }
-	        System.out.println("Done");
+			_log.info("Done");
 	        context.close();
 		}
 	}
