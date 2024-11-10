@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +27,7 @@ import io.prometheus.client.exporter.PushGateway;
 @Profile("metrics")
 @EnableScheduling
 public class PrometheusConfiguration {
+    private static final Logger _log = LoggerFactory.getLogger(PrometheusConfiguration.class);
 
     private CollectorRegistry collectorRegistry;
 
@@ -53,8 +56,7 @@ public class PrometheusConfiguration {
         try {
             pushGateway.pushAdd(collectorRegistry, metricsJobName, groupingKey);
         } catch (Throwable ex) {
-            System.err.println("Unable to push metrics to Prometheus Push Gateway");
-            ex.printStackTrace();
+            _log.error("Unable to push metrics to Prometheus Push Gateway", ex);
         }
     }
 
