@@ -26,13 +26,13 @@
 		<step id="playerLoad" next="gameLoad">
 			<tasklet>
 				<chunk reader="playerFileItemReader" writer="playerWriter"
-	                   commit-interval="20" />
+	                   commit-interval="5" />
 			</tasklet>
 		</step>
 		<step id="gameLoad" next="playerSummarization">
 			<tasklet>
 				<chunk reader="gameFileItemReader" writer="gameWriter"
-	                   commit-interval="20" />
+	                   commit-interval="5" />
 			</tasklet>
 		</step>
 		<step id="playerSummarization" parent="summarizationStep" />
@@ -62,7 +62,7 @@
 	</bean>
 
 	<bean id="playerFileItemReader" class="org.springframework.batch.item.file.FlatFileItemReader" scope="step">
-		<property name="resource" value="classpath:data/player-small1.csv" />
+		<property name="resource" value="classpath:data/player.csv" />
 		<property name="lineMapper">
 			<bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
 				<property name="lineTokenizer">
@@ -78,7 +78,7 @@
 	</bean>
 
 	<bean id="gameFileItemReader" class="org.springframework.batch.item.file.FlatFileItemReader">
-		<property name="resource" value="classpath:data/games-small.csv" />
+		<property name="resource" value="classpath:data/games.csv" />
 		<property name="lineMapper">
 			<bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
 				<property name="lineTokenizer">
