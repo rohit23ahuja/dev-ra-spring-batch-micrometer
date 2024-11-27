@@ -26,13 +26,13 @@
 		<step id="playerLoad" next="gameLoad">
 			<tasklet>
 				<chunk reader="playerFileItemReader" writer="playerWriter"
-	                   commit-interval="5" />
+	                   commit-interval="50" />
 			</tasklet>
 		</step>
 		<step id="gameLoad" next="playerSummarization">
 			<tasklet>
 				<chunk reader="gameFileItemReader" writer="gameWriter"
-	                   commit-interval="5" />
+	                   commit-interval="50" />
 			</tasklet>
 		</step>
 		<step id="playerSummarization" parent="summarizationStep" />
@@ -41,7 +41,7 @@
 	<step id="summarizationStep" xmlns="http://www.springframework.org/schema/batch">
 		<tasklet>
 			<chunk reader="playerSummarizationSource" writer="summaryWriter"
-                   commit-interval="2" />
+                   commit-interval="10" />
 		</tasklet>
 	</step>
 
