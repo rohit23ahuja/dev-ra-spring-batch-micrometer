@@ -13,7 +13,7 @@ public class SpringBatchMicrometer {
 
 	private static final Logger _log = LoggerFactory.getLogger(SpringBatchMicrometer.class);
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		final String jobName = args[0];
 		System.setProperty("springbatch.job.name", jobName);
 		System.setProperty("cricketEnabled","true");
@@ -34,6 +34,7 @@ public class SpringBatchMicrometer {
 				_log.error("Exception occurred.", e);
 	        }
 			_log.info("Done");
+			Thread.sleep(3000);
 	        context.close();
 		} else if(jobName.equals("cricketJobJava")) {
 	        JobLauncher jobLauncher = (JobLauncher) context.getBean("jobLauncher");
@@ -51,6 +52,7 @@ public class SpringBatchMicrometer {
 				_log.error("Exception occurred.", e);
 	        }
 			_log.info("Done");
+			Thread.sleep(3000);
 	        context.close();
 		}
 	}

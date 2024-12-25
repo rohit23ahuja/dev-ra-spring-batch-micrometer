@@ -5,6 +5,11 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
+import io.micrometer.core.instrument.binder.jvm.ClassLoaderMetrics;
+import io.micrometer.core.instrument.binder.jvm.JvmGcMetrics;
+import io.micrometer.core.instrument.binder.jvm.JvmMemoryMetrics;
+import io.micrometer.core.instrument.binder.jvm.JvmThreadMetrics;
+import io.micrometer.core.instrument.binder.system.ProcessorMetrics;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -48,6 +53,11 @@ public class PrometheusConfiguration {
         pushGateway = new PushGateway(pushgatewayUrl);
         groupingKey.put(metricsGroupingKey, metricsJobName);
         PrometheusMeterRegistry prometheusMeterRegistry = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
+        new ClassLoaderMetrics().bindTo(prometheusMeterRegistry);
+        new JvmMemoryMetrics().bindTo(prometheusMeterRegistry);
+        new JvmGcMetrics().bindTo(prometheusMeterRegistry);
+        new ProcessorMetrics().bindTo(prometheusMeterRegistry);
+        new JvmThreadMetrics().bindTo(prometheusMeterRegistry);
         collectorRegistry = prometheusMeterRegistry.getPrometheusRegistry();
         Metrics.globalRegistry.add(prometheusMeterRegistry);
     }

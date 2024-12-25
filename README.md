@@ -64,6 +64,7 @@ when you provide step then inside that Tasklet, then object TaskletStep is creat
 # to read 
 https://devcodef1.com/news/1111534/spring-boot-batch-job-with-micrometer-metrics
 https://stackoverflow.com/questions/66379927/is-there-an-sample-code-available-to-capture-spring-batch-micro-metrics/66405849#66405849
+https://groups.google.com/g/prometheus-developers/c/QLOpK5iY2tc
 
 # notes - spring batch documentation read
 Chunk style processing - read data one by one from a source. when the volume of data is equal to 'commit interval' then write in chunks.
