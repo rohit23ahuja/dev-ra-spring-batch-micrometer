@@ -74,3 +74,16 @@ TaskletStep is an alternative to chunk oriented processing.
 how many threads will be running when the batch job runs
 when the batch completes, how send the last metrics and then shutdown taskscheduler and close context
 add loggers
+
+# Push gateway
+Prometheus operates on pull based model. Batch jobs may not exist long enough to be scraped/pulled. Prometheus push gateway exists to allow batch jobs to expose their metrics to Prometheus. batchjobs --> push gateway --> prometheus.
+
+# Micrometer and Spring Batch + Micrometer
+```
+java instrumentation is a feature that allows extra code to be executed while our application is getting executed. You create a java agent separate from your application and you pass this java agent when executing your
+application jar.
+```
+Micrometer is a metrics instrumentation library for Java based applications. The primary goal of Micrometer is to abstract away the differences between different monitoring systems and provide a unified API for capturing and reporting metrics.
+Spring Batch provides batch metrics out-of-the-box using Micrometer. No configuration is needed. 
+
+
