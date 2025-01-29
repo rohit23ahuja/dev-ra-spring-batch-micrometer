@@ -1,0 +1,2 @@
+{{index $labels "jobName"}} has failed or not completed successfully.
+another way - {{ $labels.jobName }}
