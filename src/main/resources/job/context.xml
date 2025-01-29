@@ -22,6 +22,16 @@
 		<property name="jobRepository" ref="jobRepository" />
 	</bean>
 
+	<bean id="footballJobLauncher"
+		  class="dev.ra.springbatch.micrometer.launcher.FootballJobLauncher">
+		<constructor-arg name="jobLauncher" ref="jobLauncher"/>
+	</bean>
+
+	<bean id="cricketJobLauncher"
+		  class="dev.ra.springbatch.micrometer.launcher.CricketJobLauncher">
+		<constructor-arg name="jobLauncher" ref="jobLauncher"/>
+	</bean>
+
 	<job id="footballJob" xmlns="http://www.springframework.org/schema/batch">
 		<step id="playerLoad" next="gameLoad">
 			<tasklet>
