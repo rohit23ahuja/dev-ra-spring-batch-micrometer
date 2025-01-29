@@ -1,9 +1,43 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_PROMETHEUS",
+      "label": "Prometheus",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "10.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "graph",
+      "name": "Graph (old)",
+      "version": ""
+    },
+    {
+      "type": "datasource",
+      "id": "prometheus",
+      "name": "Prometheus",
+      "version": "1.0.0"
+    }
+  ],
   "annotations": {
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -16,13 +50,19 @@
   },
   "description": "Dashboard for Spring Batch applications instrumented with Micrometer",
   "editable": true,
+  "fiscalYearStartMonth": 0,
   "gnetId": 4701,
   "graphTooltip": 1,
-  "id": 1,
+  "id": null,
   "links": [],
+  "liveNow": false,
   "panels": [
     {
       "collapsed": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "f909ec81-a6fd-4908-85d3-ce51f7ee6c76"
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -31,7 +71,15 @@
       },
       "id": 132,
       "panels": [],
-      "repeat": null,
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "f909ec81-a6fd-4908-85d3-ce51f7ee6c76"
+          },
+          "refId": "A"
+        }
+      ],
       "title": "Spring Batch Metrics",
       "type": "row"
     },
@@ -40,17 +88,17 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
       "editable": true,
       "error": false,
       "fill": 1,
+      "fillGradient": 0,
       "grid": {
         "leftLogBase": 1,
-        "leftMax": null,
-        "leftMin": null,
-        "rightLogBase": 1,
-        "rightMax": null,
-        "rightMin": null
+        "rightLogBase": 1
       },
       "gridPos": {
         "h": 7,
@@ -58,6 +106,7 @@
         "x": 0,
         "y": 1
       },
+      "hiddenSeries": false,
       "id": 37,
       "legend": {
         "alignAsTable": false,
@@ -76,8 +125,12 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
       "paceLength": 10,
       "percentage": false,
+      "pluginVersion": "10.0.0",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -87,6 +140,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
           "expr": "spring_batch_job_active_seconds_duration_sum",
           "format": "time_series",
           "interval": "",
@@ -98,9 +155,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Job duration",
       "tooltip": {
         "msResolution": false,
@@ -111,9 +166,7 @@
       "type": "graph",
       "x-axis": true,
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
@@ -127,7 +180,6 @@
           "format": "s",
           "label": "",
           "logBase": 1,
-          "max": null,
           "min": 0,
           "show": true
         },
@@ -135,14 +187,11 @@
           "format": "short",
           "label": "",
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -150,17 +199,17 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
       "editable": true,
       "error": false,
       "fill": 1,
+      "fillGradient": 0,
       "grid": {
         "leftLogBase": 1,
-        "leftMax": null,
-        "leftMin": null,
-        "rightLogBase": 1,
-        "rightMax": null,
-        "rightMin": null
+        "rightLogBase": 1
       },
       "gridPos": {
         "h": 7,
@@ -168,6 +217,7 @@
         "x": 8,
         "y": 1
       },
+      "hiddenSeries": false,
       "id": 38,
       "legend": {
         "avg": false,
@@ -182,8 +232,12 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
       "paceLength": 10,
       "percentage": false,
+      "pluginVersion": "10.0.0",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -193,21 +247,25 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
           "expr": "rate(spring_batch_job_active_seconds_duration_sum[1m]) * 60",
           "format": "time_series",
           "hide": false,
           "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "{{name}} {{status}}",
+          "legendFormat": "{{spring_batch_job_active_name}}",
           "metric": "",
+          "range": true,
           "refId": "A",
           "step": 1200
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Job execution rate",
       "tooltip": {
         "msResolution": false,
@@ -218,9 +276,7 @@
       "type": "graph",
       "x-axis": true,
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
@@ -231,26 +287,19 @@
       ],
       "yaxes": [
         {
-          "decimals": null,
           "format": "opm",
           "label": "",
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -258,14 +307,19 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 7,
         "w": 8,
         "x": 16,
         "y": 1
       },
+      "hiddenSeries": false,
       "id": 138,
       "legend": {
         "avg": false,
@@ -280,8 +334,12 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
       "paceLength": 10,
       "percentage": false,
+      "pluginVersion": "10.0.0",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -291,6 +349,11 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
           "expr": "(sum(rate(spring_batch_job_active_seconds_duration_sum{status=\"FAILED\"}[5m])) by (name, status)) / (sum(rate(spring_batch_job_active_seconds_duration_sum[5m])) by (name, status))",
           "format": "time_series",
           "hide": false,
@@ -301,9 +364,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Job failure rate",
       "tooltip": {
         "shared": true,
@@ -312,33 +373,24 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
       "yaxes": [
         {
           "format": "percentunit",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -346,13 +398,19 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 9,
         "w": 12,
         "x": 0,
         "y": 8
       },
+      "hiddenSeries": false,
       "id": 141,
       "legend": {
         "avg": false,
@@ -367,8 +425,12 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
       "paceLength": 10,
       "percentage": false,
+      "pluginVersion": "10.0.0",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -383,6 +445,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
           "expr": "rate(spring_batch_item_read_seconds_count[1m])",
           "format": "time_series",
           "interval": "",
@@ -392,9 +458,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Item read throughput",
       "tooltip": {
         "shared": true,
@@ -403,33 +467,24 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
       "yaxes": [
         {
           "format": "ops",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "format": "ops",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -437,13 +492,19 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 9,
         "w": 12,
         "x": 12,
         "y": 8
       },
+      "hiddenSeries": false,
       "id": 140,
       "legend": {
         "avg": false,
@@ -458,8 +519,12 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
       "paceLength": 10,
       "percentage": false,
+      "pluginVersion": "10.0.0",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -474,6 +539,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
           "expr": "rate(spring_batch_chunk_write_seconds_count[1m])",
           "format": "time_series",
           "interval": "",
@@ -483,9 +552,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Item write throughput",
       "tooltip": {
         "shared": true,
@@ -494,38 +561,29 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
       "yaxes": [
         {
           "format": "ops",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "format": "ops",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     }
   ],
   "refresh": "5s",
-  "schemaVersion": 18,
+  "schemaVersion": 38,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -564,5 +622,6 @@
   "timezone": "browser",
   "title": "Spring Batch Prometheus",
   "uid": "qRLUmOCmk",
-  "version": 6
+  "version": 2,
+  "weekStart": ""
 }
