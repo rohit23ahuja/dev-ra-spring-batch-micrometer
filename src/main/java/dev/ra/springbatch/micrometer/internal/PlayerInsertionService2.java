@@ -1,5 +1,6 @@
 package dev.ra.springbatch.micrometer.internal;
 
+import dev.ra.springbatch.micrometer.PropertyReader;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,8 @@ public class PlayerInsertionService2 {
     private static final Logger _log = LoggerFactory.getLogger(PlayerInsertionService2.class);
 
     private BasicDataSource datasource;
+
+    private PropertyReader propertyReader;
 
     public void insertPlayers(String playerId,
                               String firstName,
@@ -32,7 +35,13 @@ public class PlayerInsertionService2 {
             String query = "CALL player_by_birth(?, ?, ?, ?, ?)";
             ps = connection.prepareStatement(query);
             ps.setString(1, playerId);
-            ps.setString(2, firstName);
+   if (capitalize()) {
+       ps.setString(2, firstName.toUpperCase());
+   } else {
+       ps.setString(2, firstName);
+   }
+
+
             ps.setString(3, lastName);
             ps.setLong(4, Long.parseLong(yearOfBirth));
             ps.setLong(5, Long.parseLong(yearOfDraft));
@@ -66,5 +75,13 @@ public class PlayerInsertionService2 {
 
     public void setDatasource(BasicDataSource datasource) {
         this.datasource = datasource;
+    }
+
+    public void setPropertyReader(PropertyReader propertyReader) {
+        this.propertyReader = propertyReader;
+    }
+
+    public boolean capitalize(){
+        return Boolean.parseBoolean(propertyReader.getProperties().getProperty("capitalize"));
     }
 }

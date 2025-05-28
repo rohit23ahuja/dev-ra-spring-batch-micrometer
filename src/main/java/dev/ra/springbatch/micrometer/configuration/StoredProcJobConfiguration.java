@@ -1,6 +1,7 @@
 package dev.ra.springbatch.micrometer.configuration;
 
 
+import dev.ra.springbatch.micrometer.PropertyReader;
 import dev.ra.springbatch.micrometer.internal.PlayerInsertionService2;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -53,9 +54,10 @@ public class StoredProcJobConfiguration {
     }
 
     @Bean
-    public PlayerInsertionService2 playerInsertionService2(BasicDataSource dataSource) {
+    public PlayerInsertionService2 playerInsertionService2(BasicDataSource dataSource, PropertyReader propertyReader) {
         PlayerInsertionService2 playerInsertionService2 = new PlayerInsertionService2();
         playerInsertionService2.setDatasource(dataSource);
+        playerInsertionService2.setPropertyReader(propertyReader);
         return playerInsertionService2;
 
     }
