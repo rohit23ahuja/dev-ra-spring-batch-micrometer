@@ -32,6 +32,11 @@
 		<constructor-arg name="jobLauncher" ref="jobLauncher"/>
 	</bean>
 
+	<bean id="storedProcJobLauncher"
+		  class="dev.ra.springbatch.micrometer.launcher.StoredProcJobLauncher">
+		<constructor-arg name="jobLauncher" ref="jobLauncher"/>
+	</bean>
+
 	<job id="footballJob" xmlns="http://www.springframework.org/schema/batch">
 		<step id="playerLoad" next="gameLoad">
 			<tasklet>
