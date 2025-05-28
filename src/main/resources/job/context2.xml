@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context" 
+	   xsi:schemaLocation="http://www.springframework.org/schema/batch https://www.springframework.org/schema/batch/spring-batch.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<context:annotation-config />
+	<import resource="../database2.xml" />
+
+	<context:component-scan base-package="dev.ra.springbatch.micrometer"/>
+
+	<bean class="org.springframework.batch.core.scope.StepScope" />
+
+	<bean id="jobRepository"
+		  class="org.springframework.batch.core.repository.support.JobRepositoryFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="databaseType" value="postgres" />
+	</bean>
+
+	<bean id="jobLauncher"
+		  class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
+		<property name="jobRepository" ref="jobRepository" />
+	</bean>
+
+	<bean id="storedProcJobLauncher"
+		  class="dev.ra.springbatch.micrometer.launcher.StoredProcJobLauncher">
+		<constructor-arg name="jobLauncher" ref="jobLauncher"/>
+	</bean>
+
+</beans>

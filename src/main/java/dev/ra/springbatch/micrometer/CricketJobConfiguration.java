@@ -118,6 +118,7 @@ public class CricketJobConfiguration {
 
 	@Bean
 	public CricketService cricketService() { return new CricketService();}
+
 	@Bean
 	@StepScope
 	public MethodInvokingTaskletAdapter methodInvokingTasklet(@Value("#{jobParameters['message']}") String message,
