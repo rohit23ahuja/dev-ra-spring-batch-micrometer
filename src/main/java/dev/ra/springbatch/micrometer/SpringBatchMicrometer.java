@@ -41,8 +41,8 @@ public class SpringBatchMicrometer {
                 context = new ClassPathXmlApplicationContext("job/context2.xml");
                 StoredProcJobLauncher storedProcJobLauncher = (StoredProcJobLauncher) context.getBean("storedProcJobLauncher");
                 // Example parameters for player insertion
-                String playerId = "P128";
-                String firstName = "Rohit";
+                String playerId = "P131";
+                String firstName = "Amit";
                 String lastName = "Ahuja";
                 long yearOfBirth = 1990;
                 long yearDrafted = 2015;

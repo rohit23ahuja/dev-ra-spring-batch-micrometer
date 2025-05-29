@@ -29,4 +29,6 @@
 		<constructor-arg name="jobLauncher" ref="jobLauncher"/>
 	</bean>
 
+	<bean id="propertyReader" class="dev.ra.springbatch.micrometer.PropertyReader" />
+
 </beans>
